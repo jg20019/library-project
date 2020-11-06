@@ -12,4 +12,22 @@ Library.Checkbox = function (el) {
         <input type="checkbox" /> 
       </div> 
     `; 
+
+    let checkbox = el.querySelector('input[type="checkbox"]'); 
+    checkbox.addEventListener('click', function (e) {
+        el.dispatchEvent(new CustomEvent('ChangeInput', {
+            bubbles: true, 
+            detail: {for: state.for}
+        })); 
+    }); 
+
+    update(); 
+
+    function update(next) {
+        Object.assign(state, next); 
+
+        el.querySelector('label').innerText = state.label; 
+    } 
+
+    el.Checkbox = { update }; 
 }; 
