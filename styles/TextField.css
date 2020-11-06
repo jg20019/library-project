@@ -1,6 +1,16 @@
 .form > div {
     margin-bottom: 20px; 
 }
+.error {
+    color: darkred; 
+    display: block;
+    width: 100%; 
+} 
+
+.error p {
+    padding: 5px; 
+    background-color: hsl(0, 50%, 85%); 
+} 
 
 .text-input {
     height: 50px; 

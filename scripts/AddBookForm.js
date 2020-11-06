@@ -58,17 +58,20 @@ Library.AddBookForm = function (el) {
 
         titleField.TextField.update({
             label: 'title', 
-            value: state.title
+            value: state.title, 
+            error: state.titleError, 
         }); 
 
         authorField.TextField.update({
             label: 'author',
-            value: state.author
+            value: state.author, 
+            error: state.authorError, 
         }); 
 
         pagesField.TextField.update({
             label: 'pages', 
-            value: state.pages
+            value: state.pages, 
+            error: state.pagesError, 
         }); 
 
         readField.Checkbox.update({
@@ -125,6 +128,8 @@ Library.AddBookForm = function (el) {
        }  else {
            console.log('There were errors. Try again.')
        } 
+
+       update(); 
     } 
 }
 
