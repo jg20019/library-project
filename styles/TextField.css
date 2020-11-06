@@ -1,0 +1,64 @@
+.form {
+    display: flex; 
+    flex-direction: column;  
+}
+
+.form > div {
+    margin-bottom: 20px; 
+}
+
+.text-input {
+    height: 50px; 
+    position: relative; 
+    overflow: hidden; 
+}
+
+.text-input input {
+    width: 100%; 
+    height: 100%; 
+    color: blue;
+    padding-top: 20px; 
+    border: none; 
+}
+
+.text-input label {
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    height: 100%; 
+    width: 100%; 
+    pointer-events: none; 
+    border-bottom: 1px solid black;
+}
+
+.text-input label::after {
+    content: ""; 
+    width: 100%; 
+    height: 100%;
+    position: absolute; 
+    left: 0; 
+    bottom: -2px; 
+    border-bottom: 3px solid blue; 
+    transform: translateX(-100%); 
+    transition: transform 0.3s ease;
+}
+
+.content-name {
+    position: absolute; 
+    bottom: 5px; 
+    left: 0px;
+    transition: all 0.3s ease;
+} 
+
+.text-input input:focus + .label-name .content-name,
+.text-input input:valid + .label-name .content-name {
+    transform: translateY(-150%); 
+    font-size: 14px; 
+    color: blue;
+}
+
+.text-input input:focus + .label-name::after, 
+.text-input input:valid + .label-name::after {
+    transform: translateX(0%); 
+} 
+
