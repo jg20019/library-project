@@ -60,7 +60,14 @@ Library.AddBookForm = function (el) {
         addBook(); 
     });
 
+    el.querySelector('.close-button').addEventListener('click', e => {
+        el.dispatchEvent(new CustomEvent('HideForm', {
+            bubbles: true 
+        })); 
+    }); 
     update(); 
+
+    el.AddBookForm = { update } 
 
 
     function update(next){
@@ -155,5 +162,3 @@ Library.AddBookForm = function (el) {
        update(); 
     } 
 }
-
-Library.AddBookForm(document.querySelector('#root')); 
