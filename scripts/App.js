@@ -2,21 +2,15 @@ window.Library = window.Library || {};
 
 Library.App = function (el) {
     el.innerHTML = `
-       <div></div>
-       <button> Add Book </button> 
+       <div id="libraryTable"></div> 
+       <div id="form"></div>
     `; 
 
-    const addButton = el.querySelector('button'); 
-
-    addButton.addEventListener('click', function (e) {
-        console.log('Button Clicked'); 
-        addButton.dispatchEvent(new CustomEvent('ShowForm', {
-            bubbles: true
-        })); 
-    }); 
-
-    const form = el.querySelector('div'); 
-    Library.AddBookForm(el.querySelector('div'))
+    const libraryTable = el.querySelector('#libraryTable'); 
+    Library.LibraryTable(libraryTable); 
+    
+    const form = el.querySelector('#form'); 
+    Library.AddBookForm(form);  
 
     el.addEventListener('HideForm', function (e) {
         form.AddBookForm.update({visible: false}); 
@@ -27,4 +21,4 @@ Library.App = function (el) {
     }); 
 };  
 
-Library.App(document.querySelector('#root')); 
+Library.App(document.querySelector('#root'));
