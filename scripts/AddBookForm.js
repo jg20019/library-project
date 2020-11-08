@@ -33,28 +33,35 @@ Library.AddBookForm = function (el) {
 
     const titleField = el.querySelector('.title'); 
     Library.TextField(titleField); 
+    titleField.TextField.update({onChange: 'TitleChanged'}); 
+    el.addEventListener('TitleChanged', function (e) {
+        update({title: e.detail.value, titleError: ""});
+    }); 
 
     const authorField = el.querySelector('.author'); 
     Library.TextField(authorField); 
+    authorField.TextField.update({onChange: 'AuthorChanged'}) 
+    el.addEventListener('AuthorChanged', function (e) {
+        update({author: e.detail.value, authorError: ""}); 
+    }); 
 
     const pagesField = el.querySelector('.pages'); 
     Library.TextField(pagesField); 
+    pagesField.TextField.update({onChange: 'PagesChanged'}) 
+    console.log('Pages changed')
+    el.addEventListener('PagesChanged', function (e) {
+        update({pages: e.detail.value, pagesError: ""}); 
+    }); 
 
     const readField = el.querySelector('.read'); 
     Library.Checkbox(readField); 
+    readField.Checkbox.update({onClick: 'ToggleRead'}) 
+    el.addEventListener('ToggleRead', function (e) {
+        update({read: !state.read}) 
+    });
+
     readField.Checkbox.update({for: 'read'})
 
-    el.addEventListener('ChangeInput', function (e) {
-        if (e.detail.for === 'title') {
-            update({title: e.detail.value, titleError: ""}); 
-        } else if (e.detail.for === 'author') {
-            update({author: e.detail.value, authorError: ""}); 
-        } else if (e.detail.for === 'pages') {
-            update({pages: e.detail.value, pagesError: ""}) 
-        } else if (e.detail.for === 'read') {
-            update({read: !state.read})
-        } 
-    }); 
 
     el.querySelector('input[type="submit"]').addEventListener('click', e => {
         addBook(); 

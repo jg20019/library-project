@@ -2,8 +2,8 @@ window.Library = window.Library || {};
 
 Library.Checkbox = function (el) {
     let state = {
-        for: 'checkbox', 
         label: 'label text', 
+        onClick: 'CheckboxClicked'
     }; 
 
     el.innerHTML = `
@@ -15,9 +15,8 @@ Library.Checkbox = function (el) {
 
     let checkbox = el.querySelector('input[type="checkbox"]'); 
     checkbox.addEventListener('click', function (e) {
-        el.dispatchEvent(new CustomEvent('ChangeInput', {
+        el.dispatchEvent(new CustomEvent(state.onClick, {
             bubbles: true, 
-            detail: {for: state.for}
         })); 
     }); 
 

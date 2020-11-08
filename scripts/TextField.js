@@ -3,6 +3,7 @@ window.Library = window.Library || {};
 Library.TextField = function (el) {
     let state = {
         error: '',
+        onChange: 'ChangeInput' 
     }; 
 
     el.innerHTML = 
@@ -20,7 +21,7 @@ Library.TextField = function (el) {
             for: state.label, 
             value: e.target.value
         }; 
-        el.dispatchEvent(new CustomEvent('ChangeInput', {
+        el.dispatchEvent(new CustomEvent(state.onChange, {
             bubbles: true, 
             detail: detail
         })); 
