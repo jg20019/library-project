@@ -10,17 +10,24 @@ Library.AddBookForm = function (el) {
         pages: "", 
         pagesError: "", 
         read: false,
+        
+        visible: true, 
     }; 
 
     el.innerHTML = 
-        `<div class="form">
-          <div class="close-button">+</div> 
-          <div class="title"></div>
-          <div class="author"></div>
-          <div class="pages"></div> 
-          <div class="read"></div> 
-          <input type="submit" value="Add Book">
-        </div>`; 
+        `<div class="bg-modal">  
+          <div class="form-modal"> 
+            <h1> Add Book </h1>
+            <div class="form">
+                  <div class="close-button">+</div> 
+                  <div class="title"></div>
+                  <div class="author"></div>
+                  <div class="pages"></div>
+                  <div class="read"></div> 
+                  <input type="submit" value="Add Book">
+            </div> 
+          </div> 
+         </div>`; 
 
     const titleField = el.querySelector('.title'); 
     Library.TextField(titleField); 
@@ -134,4 +141,4 @@ Library.AddBookForm = function (el) {
     } 
 }
 
-Library.AddBookForm(document.querySelector('#form')); 
+Library.AddBookForm(document.querySelector('#root')); 
