@@ -29,6 +29,8 @@ Library.AddBookForm = function (el) {
           </div> 
          </div>`; 
 
+    const modal = el.querySelector('.bg-modal'); 
+
     const titleField = el.querySelector('.title'); 
     Library.TextField(titleField); 
 
@@ -86,8 +88,21 @@ Library.AddBookForm = function (el) {
             label: 'Have you read this book?'
         }) 
 
+        if (state.visible) {
+            showModal(); 
+        } else {
+            hideModal(); 
+        } 
         console.log(state); 
     }
+
+    function hideModal(){
+        modal.style.display = 'none'; 
+    } 
+
+    function showModal(){
+        modal.style.display = 'flex'; 
+    } 
 
     function addBook() {
        /* Validates the form. If form is valid, adds a book to 
