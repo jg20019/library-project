@@ -14,6 +14,7 @@ Library.AddBookForm = function (el) {
 
     el.innerHTML = 
         `<div class="form">
+          <div class="close-button">+</div> 
           <div class="title"></div>
           <div class="author"></div>
           <div class="pages"></div> 
@@ -133,4 +134,4 @@ Library.AddBookForm = function (el) {
     } 
 }
 
-Library.AddBookForm(document.querySelector('#root')); 
+Library.AddBookForm(document.querySelector('#form')); 
