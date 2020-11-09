@@ -31,10 +31,9 @@ Library.LibraryTable = function (el) {
         let booksEl = el.querySelector('.books'); 
         booksEl.innerHTML = ''; 
         state.books.forEach(book => {
-            let bookEl = document.createElement('div'); 
-            Library.BookCard(bookEl); 
-            bookEl.BookCard.update(book); 
-            booksEl.appendChild(bookEl); 
+            let card = Library.BookCard(document.createElement('div')); 
+            card.BookCard.update(book); 
+            booksEl.appendChild(card); 
         }); 
     } 
 }; 
@@ -62,6 +61,8 @@ Library.BookCard = function (el) {
     let readEl = el.querySelector('.read'); 
 
     el.BookCard = { update } 
+
+    return el; 
 
     function update(next){
         Object.assign(state, next); 
