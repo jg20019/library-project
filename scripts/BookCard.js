@@ -10,9 +10,10 @@ Library.BookCard = function (el) {
 
     el.innerHTML = `
         <div class="book-card"> 
-          <span class="title"></span> 
-          <span class="author"></span> 
-          <span class="pages"></span> 
+          
+          <span class="title"></span>
+          by <span class="author"></span> 
+          <span class="pages"></span> pages 
           <span class="read"></span> 
         </div> 
     `; 
@@ -28,7 +29,6 @@ Library.BookCard = function (el) {
 
     function update(next){
         Object.assign(state, next); 
-
         titleEl.innerText = state.title; 
         authorEl.innerText = state.author; 
         pagesEl.innerText = state.pages; 
