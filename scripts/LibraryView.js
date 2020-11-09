@@ -1,6 +1,6 @@
 window.Library = window.Library || {}; 
 
-Library.LibraryTable = function (el) {
+Library.LibraryView = function (el) {
     let state = {
         books: [
             { title: 'A Tale of Two Cities.', 

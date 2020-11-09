@@ -22,4 +22,4 @@ Library.App = function (el) {
 };  
 
 // Library.App(document.querySelector('#root'));
-Library.LibraryTable(document.querySelector('#root')); 
+Library.LibraryView(document.querySelector('#root')); 
