@@ -12,6 +12,10 @@ Library.LibraryView = function (el) {
     };  
 
     el.innerHTML = `
+        <header> 
+            <h1> Library </h1> 
+            <button> Add Book </button> 
+        </header>  
         <div class="books"></div>
     `; 
    
@@ -26,6 +30,12 @@ Library.LibraryView = function (el) {
     /* Some messages that it should send. 
      * - ShowForm
      */ 
+
+    el.querySelector('header button').addEventListener('click', function (e) {
+        el.dispatchEvent(new CustomEvent('ShowForm', {
+            bubbles: true
+        })); 
+    }); 
 
     function update(){
         let booksEl = el.querySelector('.books'); 

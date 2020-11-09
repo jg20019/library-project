@@ -2,12 +2,12 @@ window.Library = window.Library || {};
 
 Library.App = function (el) {
     el.innerHTML = `
-       <div id="libraryTable"></div> 
+       <div id="libraryView"></div> 
        <div id="form"></div>
     `; 
 
-    const libraryTable = el.querySelector('#libraryTable'); 
-    Library.LibraryTable(libraryTable); 
+    const libraryView = el.querySelector('#libraryView'); 
+    Library.LibraryView(libraryView); 
     
     const form = el.querySelector('#form'); 
     Library.AddBookForm(form);  
@@ -21,5 +21,5 @@ Library.App = function (el) {
     }); 
 };  
 
-// Library.App(document.querySelector('#root'));
-Library.LibraryView(document.querySelector('#root')); 
+Library.App(document.querySelector('#root'));
+// Library.LibraryView(document.querySelector('#root')); 
