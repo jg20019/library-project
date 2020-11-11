@@ -42,6 +42,13 @@ Library.LibraryView = function (el) {
         })); 
     }); 
 
+    function addBook(bookData) {
+        let {title, author, numPages, read} = bookData; 
+        let book = {title, author, pages: numPages, read}; 
+        state.books.push(book); 
+        update(); 
+    }
+
     function update(){
         let booksEl = el.querySelector('.books'); 
         booksEl.innerHTML = ''; 
@@ -51,5 +58,7 @@ Library.LibraryView = function (el) {
             booksEl.appendChild(card); 
         }); 
     } 
+
+    el.LibraryView = { addBook, update };  
 }; 
 

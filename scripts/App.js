@@ -19,7 +19,10 @@ Library.App = function (el) {
     el.addEventListener('ShowForm', function (e) {
         form.AddBookForm.update({visible: true}); 
     }); 
+
+    el.addEventListener('AddBook', function (e) {
+        libraryView.LibraryView.addBook(e.detail.bookData); 
+    }); 
 };  
 
 Library.App(document.querySelector('#root'));
-// Library.LibraryView(document.querySelector('#root')); 

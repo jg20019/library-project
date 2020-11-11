@@ -48,7 +48,6 @@ Library.AddBookForm = function (el) {
     const pagesField = el.querySelector('.pages'); 
     Library.TextField(pagesField); 
     pagesField.TextField.update({onChange: 'PagesChanged'}) 
-    console.log('Pages changed')
     el.addEventListener('PagesChanged', function (e) {
         update({pages: e.detail.value, pagesError: ""}); 
     }); 
@@ -64,7 +63,7 @@ Library.AddBookForm = function (el) {
 
 
     el.querySelector('input[type="submit"]').addEventListener('click', e => {
-        addBook(); 
+        submit(); 
     });
 
     el.querySelector('.close-button').addEventListener('click', e => {
@@ -107,7 +106,6 @@ Library.AddBookForm = function (el) {
         } else {
             hideModal(); 
         } 
-        console.log(state); 
     }
 
     function hideModal(){
@@ -165,24 +163,35 @@ Library.AddBookForm = function (el) {
 
        let valid = !(titleError || authorError || pagesError); 
        let errors = {titleError, authorError, pagesError}; 
-       return [{title, author, numPages, read}, valid, errors]; 
+
+       let bookData = {title, author, numPages, read} 
+       return [bookData, valid, errors]; 
     } 
 
-    function addBook() {
-       /* Validates the form. If form is valid, adds a book to 
-        * the library. If form is invalid, sets and displays appropriate
-        * error messages. 
-        */ 
+    function addBook(bookData) {
+        el.dispatchEvent(new CustomEvent('AddBook', {
+            bubbles: true, 
+            detail: {bookData}, 
+        })); 
+    } 
+
+    function clearFields() {
+        update({title: "", author: "", pages: "", read: false}); 
+    } 
+
+    function showErrors(errors) {
+        update(errors); 
+    } 
+
+    function submit() {
        let bookData, valid, errors; 
        [bookData, valid, errors] = validateBook(state.title, state.author, state.pages, state.read); 
 
        if (valid) {
-           console.log('Valid')
-           console.log(bookData) 
+           addBook(bookData);  
+           clearFields(); 
        }  else {
-           console.log('There were errors.'); 
+           showErrors(errors); 
        } 
-       
-       update(errors); 
     } 
 }
