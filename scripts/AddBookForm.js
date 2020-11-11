@@ -118,54 +118,71 @@ Library.AddBookForm = function (el) {
         modal.style.display = 'flex'; 
     } 
 
+
+    function validateTitle(title) {
+        if (Library.Utils.isBlank(title)) {
+            return ['', 'title is blank']; 
+        } else {
+            return [title.trim(), ''];  
+        } 
+    } 
+
+    function validateAuthor(author) {
+        if (Library.Utils.isBlank(author)) {
+           return ['', 'author is blank']; 
+        } else {
+            return [author.trim(), '']; 
+        } 
+    } 
+
+    function validatePages(pages) {
+       if (Library.Utils.isBlank(pages)) {
+           return ['', 'pages is blank']; 
+       } else {
+           numPages = parseInt(pages)
+           if (isNaN(numPages)) {
+               return ['', 'number of pages should be a number.']; 
+           } else if (numPages <= 0) {
+               return ['', 'number of pages should be greater than 0']; 
+           } else {
+               return [numPages, '']; 
+           } 
+       } 
+    } 
+
+    function validateBook(titleField, authorField, pagesField, readField) {
+
+       let title, titleError; 
+       [title, titleError] = validateTitle(titleField);  
+
+       let author, authorError; 
+       [author, authorError] = validateAuthor(authorField); 
+
+       let numPages, pagesError; 
+       [numPages, pagesError] = validatePages(pagesField); 
+
+       let read = readField; 
+
+       let valid = !(titleError || authorError || pagesError); 
+       let errors = {titleError, authorError, pagesError}; 
+       return [{title, author, numPages, read}, valid, errors]; 
+    } 
+
     function addBook() {
        /* Validates the form. If form is valid, adds a book to 
         * the library. If form is invalid, sets and displays appropriate
         * error messages. 
         */ 
-
-       let valid = true; 
-
-       let title; 
-       if (Library.Utils.isBlank(state.title)) {
-           state.titleError = "title is blank"
-           valid = false;
-       } else {
-           title = state.title.trim(); 
-       } 
-
-       let author; 
-       if (Library.Utils.isBlank(state.author)) {
-           state.authorError = "author is blank"
-           valid = false;
-       } else {
-           author = state.author.trim(); 
-       } 
-
-       let pages; 
-       if (Library.Utils.isBlank(state.pages)) {
-           state.pagesError = "pages is blank"
-           valid = false; 
-       } else {
-           pages = parseInt(state.pages)
-           if (isNaN(pages)) {
-               state.pagesError = "number of pages should be a number."; 
-               valid = false; 
-           } else if (pages <= 0) {
-               state.pagesError = "number of pages should be greater than 0"; 
-               valid = false;
-           } 
-       } 
-
-       let read = state.read; 
+       let bookData, valid, errors; 
+       [bookData, valid, errors] = validateBook(state.title, state.author, state.pages, state.read); 
 
        if (valid) {
-           console.log('Book is valid'); 
-           console.log({title, author, pages, read}) 
+           console.log('Valid')
+           console.log(bookData) 
        }  else {
-           console.log('There were errors. Try again.')
+           console.log('There were errors.'); 
        } 
-
-       update(); 
+       
+       update(errors); 
     } 
 }
