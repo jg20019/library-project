@@ -3,10 +3,15 @@ window.Library = window.Library || {};
 Library.LibraryView = function (el) {
     let state = {
         books: [
-            { title: 'A Tale of Two Cities.', 
+            { title: 'A Tale of Two Cities', 
               author: 'Charles Dickens', 
               pages: 295, 
               read: true
+            },
+            { title: 'Great Expectations', 
+              author: 'Charles Dickens', 
+              pages: 300, 
+              read: false
             }, 
         ]
     };  
