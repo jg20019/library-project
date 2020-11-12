@@ -9,7 +9,7 @@ class Book {
     } 
 
     toggleRead() {
-        this.read = !this.read; 
+        return new Book(this.title, this.author, this.pages, !this.read); 
     } 
 } 
 

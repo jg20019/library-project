@@ -38,8 +38,7 @@ Library.LibraryView = function (el) {
         let books = state.books.map((book, index) => {
             console.log(book); 
             if (index === e.detail.bookIndex) {
-                book.toggleRead(); 
-                return book; 
+                return book.toggleRead(); 
             } else {
                 return book; 
             } 
@@ -56,7 +55,7 @@ Library.LibraryView = function (el) {
 
     function addBook(bookData) {
         let {title, author, numPages, read} = bookData; 
-        let book = {title, author, pages: numPages, read}; 
+        let book = new Library.Book(title, author, numPages, read); 
         state.books.push(book); 
         update(); 
     }
