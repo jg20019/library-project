@@ -43,6 +43,15 @@ Library.LibraryView = function (el) {
         })); 
     }); 
 
+    el.addEventListener('RemoveBook', function (e) {
+        let books = state.books.filter((book, index) => {
+            return index !== e.detail.bookIndex;  
+        }); 
+        console.log(state.books); 
+        console.log(books); 
+        update({books: books}); 
+    }); 
+
     function addBook(bookData) {
         let {title, author, numPages, read} = bookData; 
         let book = {title, author, pages: numPages, read}; 
@@ -50,14 +59,24 @@ Library.LibraryView = function (el) {
         update(); 
     }
 
-    function update(){
+    function update(next){
+        Object.assign(state, next); 
         let booksEl = el.querySelector('.books'); 
         booksEl.innerHTML = ''; 
-        state.books.forEach(book => {
-            let card = Library.BookCard(document.createElement('div')); 
-            card.BookCard.update(book); 
-            booksEl.appendChild(card); 
-        }); 
+
+        if (state.books.length === 0) {
+            booksEl.innerHTML = `
+                <div class='empty-library-message'>
+                    You don't have any books in your library 
+                </div>`; 
+        } else { 
+            state.books.forEach((book, index) => {
+                let card = Library.BookCard(document.createElement('div')); 
+                book.index = index;  
+                card.BookCard.update(book); 
+                booksEl.appendChild(card); 
+            }); 
+        } 
     } 
 
     el.LibraryView = { addBook, update };  
