@@ -36,6 +36,7 @@ Library.LibraryView = function (el) {
 
     el.addEventListener('ToggleRead', function (e) {
         let books = state.books.map((book, index) => {
+            console.log(book); 
             if (index === e.detail.bookIndex) {
                 book.toggleRead(); 
                 return book; 
