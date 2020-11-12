@@ -43,13 +43,23 @@ Library.LibraryView = function (el) {
         })); 
     }); 
 
+    el.addEventListener('ToggleRead', function (e) {
+        let books = state.books.map((book, index) => {
+            if (index === e.detail.bookIndex) {
+                book.toggleRead(); 
+                return book; 
+            } else {
+                return book; 
+            } 
+        }); 
+        update({books}); 
+    }); 
+
     el.addEventListener('RemoveBook', function (e) {
         let books = state.books.filter((book, index) => {
             return index !== e.detail.bookIndex;  
         }); 
-        console.log(state.books); 
-        console.log(books); 
-        update({books: books}); 
+        update({books}); 
     }); 
 
     function addBook(bookData) {
