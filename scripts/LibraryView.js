@@ -72,7 +72,7 @@ Library.LibraryView = function (el) {
                 </div>`; 
         } else { 
             state.books.forEach((book, index) => {
-                let card = new Library.BookCard(document.createElement('div')); 
+                let card = Library.BookCard(document.createElement('div')); 
                 book.index = index;  
                 card.BookCard.update(book); 
                 booksEl.appendChild(card); 
