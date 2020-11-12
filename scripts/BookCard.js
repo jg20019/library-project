@@ -1,60 +1,64 @@
 window.Library = window.Library  || {}; 
 
-Library.BookCard = function (el) {
-    let state = {
-        index: 0, 
-        title: 'title', 
-        author: 'author', 
-        pages: '1', 
-        read: true
+class BookCard {
+    constructor(el) {
+        this.el = el; 
+        this.el.innerHTML = `
+            <div class="book-card"> 
+              <span class="title"></span> by <span class="author"></span> 
+              <span class="pages"></span> pages 
+              <span class="read"></span> 
+              <span class="close-button">+</span> 
+              <span class="toggle-read">
+                <span class="toggle-message"></span> 
+                <input type="checkbox"> 
+              </span> 
+            </div> 
+        `; 
+
+        this.titleEl = el.querySelector('.title'); 
+        this.authorEl = el.querySelector('.author'); 
+        this.pagesEl = el.querySelector('.pages'); 
+        this.readEl = el.querySelector('.read'); 
+        this.toggleMessage = el.querySelector('.toggle-message'); 
+        this.checkbox = el.querySelector('input[type="checkbox"]'); 
+
+        this.state = {
+            index: 0, 
+            title: 'title', 
+            author: 'author', 
+            pages: '1', 
+            read: true, 
+        }; 
+    
+        this.el.querySelector('.close-button').addEventListener('click', e => {
+            this.el.dispatchEvent(new CustomEvent('RemoveBook', {
+                bubbles: true,
+                detail: { bookIndex: this.state.index }, 
+            })); 
+        }); 
+
+        this.checkbox.addEventListener('click', e => {
+            this.el.dispatchEvent(new CustomEvent('ToggleRead', {
+                bubbles: true, 
+                detail: { bookIndex: this.state.index }, 
+            })) 
+        }); 
+
+        this.el.BookCard = this;  
+        return el; 
     } 
 
-    el.innerHTML = `
-        <div class="book-card"> 
-          <span class="title"></span> by <span class="author"></span> 
-          <span class="pages"></span> pages 
-          <span class="read"></span> 
-          <span class="close-button">+</span> 
-          <span class="toggle-read">
-            <span class="toggle-message"></span> 
-            <input type="checkbox"> 
-          </span> 
-        </div> 
-    `; 
+    update(next) {
+        Object.assign(this.state, next); 
 
-    let titleEl = el.querySelector('.title'); 
-    let authorEl = el.querySelector('.author'); 
-    let pagesEl = el.querySelector('.pages'); 
-    let readEl = el.querySelector('.read'); 
-    let toggleMessage = el.querySelector('.toggle-message'); 
-
-    let checkbox = el.querySelector('input[type="checkbox"]'); 
-
-    el.querySelector('.close-button').addEventListener('click', function (e) {
-        el.dispatchEvent(new CustomEvent('RemoveBook', {
-            bubbles: true,
-            detail: { bookIndex: state.index }, 
-        })); 
-    }); 
-
-    checkbox.addEventListener('click', function (e) {
-        el.dispatchEvent(new CustomEvent('ToggleRead', {
-            bubbles: true, 
-            detail: { bookIndex: state.index }, 
-        })) 
-    }); 
-
-    el.BookCard = { update } 
-
-    return el; 
-
-    function update(next){
-        Object.assign(state, next); 
-        titleEl.innerText = state.title; 
-        authorEl.innerText = state.author; 
-        pagesEl.innerText = state.pages; 
-        readEl.innerText = state.read ? 'You have read this book' : 'You have not read this book'; 
-
-        toggleMessage.innerText = state.read ? "I haven't read this book." : "I have read this book"; 
-    }
+        let {title, author, pages, read } = this.state; 
+        this.titleEl.innerText = title; 
+        this.authorEl.innerText = author; 
+        this.pagesEl.innerText = pages; 
+        this.readEl.innerText = read ? 'You have read this book' : 'You have not read this book'; 
+        this.toggleMessage.innerText = read ? "I haven't read this book." : "I have read this book"; 
+    } 
 } 
+
+Library.BookCard = BookCard; 

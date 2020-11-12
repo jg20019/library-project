@@ -28,15 +28,6 @@ Library.LibraryView = function (el) {
 
     update(); 
 
-    /* Some message it might want to hear. 
-     * - AddBook 
-     * - RemoveBook
-     */ 
-
-    /* Some messages that it should send. 
-     * - ShowForm
-     */ 
-
     el.querySelector('header button').addEventListener('click', function (e) {
         el.dispatchEvent(new CustomEvent('ShowForm', {
             bubbles: true
@@ -81,7 +72,7 @@ Library.LibraryView = function (el) {
                 </div>`; 
         } else { 
             state.books.forEach((book, index) => {
-                let card = Library.BookCard(document.createElement('div')); 
+                let card = new Library.BookCard(document.createElement('div')); 
                 book.index = index;  
                 card.BookCard.update(book); 
                 booksEl.appendChild(card); 
@@ -91,4 +82,3 @@ Library.LibraryView = function (el) {
 
     el.LibraryView = { addBook, update };  
 }; 
-
