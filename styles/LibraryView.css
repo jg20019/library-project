@@ -8,10 +8,23 @@ header {
     justify-content: space-between; 
 }
 
+.empty-library-message {
+    pointer-events: none;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    font-size: 20px; 
+    position: absolute; 
+} 
 
 /* Book Cards */ 
 .books {
     display: flex; 
     flex-wrap: wrap; 
 } 
+
 
