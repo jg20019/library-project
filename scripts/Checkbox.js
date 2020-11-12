@@ -1,32 +1,40 @@
 window.Library = window.Library || {}; 
 
-Library.Checkbox = function (el) {
-    let state = {
-        label: 'label text', 
-        onClick: 'CheckboxClicked'
-    }; 
+class Checkbox {
+    constructor(el) {
+        this.state = {
+            label: 'label text', 
+            onClick: 'CheckboxClicked'
+        };  
 
-    el.innerHTML = `
-      <div class="checkbox"> 
-        <label></label> 
-        <input type="checkbox" /> 
-      </div> 
-    `; 
+        this.el = el;
+        this.el.innerHTML = `
+            <div class="checkbox"> 
+               <label></label> 
+               <input type="checkbox" /> 
+            </div> 
+        `; 
 
-    let checkbox = el.querySelector('input[type="checkbox"]'); 
-    checkbox.addEventListener('click', function (e) {
-        el.dispatchEvent(new CustomEvent(state.onClick, {
-            bubbles: true, 
-        })); 
-    }); 
+        this.checkbox = this.el.querySelector('input[type="checkbox"]'); 
+        this.checkbox.addEventListener('click', e => {
+            this.dispatchEvent(this.state.onClick); 
+        }); 
 
-    update(); 
-
-    function update(next) {
-        Object.assign(state, next); 
-
-        el.querySelector('label').innerText = state.label; 
+        this.el.Checkbox = this; 
+        return this.el;
     } 
 
-    el.Checkbox = { update }; 
-}; 
+    dispatchEvent(name, detail){
+        this.el.dispatchEvent(new CustomEvent(name, {
+            bubbles: true, 
+            detail: detail
+        })); 
+    } 
+
+    update(next) {
+        Object.assign(this.state, next); 
+        this.el.querySelector('label').innerText = this.state.label; 
+    } 
+} 
+
+Library.Checkbox = Checkbox; 

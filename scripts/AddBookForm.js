@@ -52,8 +52,7 @@ Library.AddBookForm = function (el) {
         update({pages: e.detail.value, pagesError: ""}); 
     }); 
 
-    const readField = el.querySelector('.read'); 
-    Library.Checkbox(readField); 
+    const readField = new Library.Checkbox(el.querySelector('.read')); 
     readField.Checkbox.update({onClick: 'ToggleRead'}) 
     el.addEventListener('ToggleRead', function (e) {
         update({read: !state.read}) 
