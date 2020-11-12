@@ -11,7 +11,7 @@ Library.AddBookForm = function (el) {
         pagesError: "", 
         read: false,
         
-        visible: true, 
+        visible: false, 
     }; 
 
     el.innerHTML = 
