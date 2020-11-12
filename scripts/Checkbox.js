@@ -17,18 +17,11 @@ class Checkbox {
 
         this.checkbox = this.el.querySelector('input[type="checkbox"]'); 
         this.checkbox.addEventListener('click', e => {
-            this.dispatchEvent(this.state.onClick); 
+            Library.Events.dispatchEvent(this.el, this.state.onClick); 
         }); 
 
         this.el.Checkbox = this; 
         return this.el;
-    } 
-
-    dispatchEvent(name, detail){
-        this.el.dispatchEvent(new CustomEvent(name, {
-            bubbles: true, 
-            detail: detail
-        })); 
     } 
 
     update(next) {

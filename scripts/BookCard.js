@@ -30,24 +30,17 @@ class BookCard {
             pages: '1', 
             read: true, 
         }; 
-    
+   
         this.el.querySelector('.close-button').addEventListener('click', e => {
-            this.dispatchEvent('RemoveBook', {bookIndex: this.state.index}); 
+            Library.Events.dispatchEvent(this.el, 'RemoveBook', {bookIndex: this.state.index}); 
         }); 
 
         this.checkbox.addEventListener('click', e => {
-            this.dispatchEvent('ToggleRead', {bookIndex: this.state.index});
+            Library.Events.dispatchEvent(this.el, 'ToggleRead', {bookIndex: this.state.index});
         }); 
 
         this.el.BookCard = this;  
         return el; 
-    } 
-
-    dispatchEvent(name, detail) {
-        this.el.dispatchEvent(new CustomEvent(name, {
-            bubbles: true, 
-            detail: detail, 
-        })); 
     } 
 
     update(next) {
