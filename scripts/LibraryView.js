@@ -29,9 +29,7 @@ Library.LibraryView = function (el) {
     update(); 
 
     el.querySelector('header button').addEventListener('click', function (e) {
-        el.dispatchEvent(new CustomEvent('ShowForm', {
-            bubbles: true
-        })); 
+        Library.Events.dispatchEvent(el, 'ShowForm'); 
     }); 
 
     el.addEventListener('ToggleRead', function (e) {

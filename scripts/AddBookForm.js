@@ -66,10 +66,9 @@ Library.AddBookForm = function (el) {
     });
 
     el.querySelector('.close-button').addEventListener('click', e => {
-        el.dispatchEvent(new CustomEvent('HideForm', {
-            bubbles: true 
-        })); 
+        Library.Events.dispatchEvent(el, 'HideForm');   
     }); 
+
     update(); 
 
     el.AddBookForm = { update } 
@@ -168,10 +167,7 @@ Library.AddBookForm = function (el) {
     } 
 
     function addBook(bookData) {
-        el.dispatchEvent(new CustomEvent('AddBook', {
-            bubbles: true, 
-            detail: {bookData}, 
-        })); 
+        Library.Events.dispatchEvent(el, 'AddBook', { bookData }); 
     } 
 
     function clearFields() {

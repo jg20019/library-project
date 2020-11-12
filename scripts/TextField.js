@@ -21,10 +21,7 @@ Library.TextField = function (el) {
             for: state.label, 
             value: e.target.value
         }; 
-        el.dispatchEvent(new CustomEvent(state.onChange, {
-            bubbles: true, 
-            detail: detail
-        })); 
+        Library.Events.dispatchEvent(el, state.onChange, detail); 
     }); 
 
     function update(next) {
